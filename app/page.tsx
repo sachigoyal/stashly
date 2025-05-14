@@ -1,7 +1,9 @@
-import Image from "next/image";
+import SignUp from "@/components/SignUpForm";
+
 
 export default function Home() {
   return (
-<div>hi</div>
+<div>hi
+</div>
   );
 }
