@@ -1,9 +1,11 @@
-import SignUp from "@/components/SignUpForm";
+import Navbar from "@/components/Navbar";
+
 
 
 export default function Home() {
   return (
-<div>hi
+<div>
+  <Navbar />
 </div>
   );
 }
