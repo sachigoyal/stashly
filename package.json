@@ -15,6 +15,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.19.3",
     "@hookform/resolvers": "^5.0.1",
+    "@imagekit/next": "^2.1.2",
     "@neondatabase/serverless": "^1.0.0",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-label": "^2.1.6",
@@ -23,6 +24,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
+    "imagekit": "^6.0.0",
     "lucide-react": "^0.510.0",
     "motion": "^12.11.3",
     "next": "15.3.2",
@@ -31,6 +33,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.3",
     "tailwind-merge": "^3.3.0",
+    "uuid": "^11.1.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {

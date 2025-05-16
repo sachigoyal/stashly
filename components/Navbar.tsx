@@ -7,7 +7,7 @@ import { ModeToggle } from "./ModeToggle";
 
 export default function Navbar() {
     return(
-        <div className="w-full">
+        <div className="w-full shadow-md">
             <div className="container mx-auto py-6 max-w-8xl">
             <div className="flex items-center justify-between">
                 <Link href="/" className="">
