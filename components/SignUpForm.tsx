@@ -30,7 +30,7 @@ import { Lock, Eye, EyeOff, AlertCircle } from "lucide-react";
 import Link from "next/link";
 export default function SignUpForm() {
   const router = useRouter();
-  const { signUp, isLoaded, setActive } = useSignUp();
+  const { signUp, isLoaded, setActive } = useSignUp();  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [verifying, setVerifying] = useState(false);
@@ -172,12 +172,16 @@ export default function SignUpForm() {
     <div className="w-full flex justify-center items-center p-5">
       <Card className="w-full max-w-md shadow-md border border-gray-100">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
+          <CardTitle className="text-3xl font-semibold">Sign Up</CardTitle>
           <CardDescription>
             Enter your credentials to create your account
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {authError && (<div className="bg-red-50 text-red-700 p-4 rounded-lg mb-4 flex items-center gap-2">
+          <AlertCircle className="h-5 w-5 flex-shrink-0" />
+          <span>{authError}</span>
+        </div>)}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
@@ -189,7 +193,7 @@ export default function SignUpForm() {
                     <FormControl>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
+                        <Input type="email"
                           placeholder="example@example.com"
                           className="pl-10"
                           {...field}
