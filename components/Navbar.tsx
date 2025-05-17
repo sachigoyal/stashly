@@ -31,7 +31,7 @@ export default function Navbar() {
                     </SignedOut>
                     {/* when user is signed in */}
                     <SignedIn>
-
+                    
                     </SignedIn>
                 </div>
                 </div>
