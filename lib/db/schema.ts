@@ -34,9 +34,12 @@ export const filesRelations = relations(files, ({one, many}) => (
         parent : one(files, {
             fields: [files.parentId],
             references: [files.id],
-        }), 
+            relationName: "parentToChild"
+        }),
 
-        children: many(files)
+        children: many(files, {
+            relationName: "parentToChild"
+        })
     }
 ))
 
