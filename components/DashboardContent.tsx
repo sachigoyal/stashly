@@ -39,7 +39,7 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
     <div className="w-full mx-auto">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-3xl font-semibold text-foreground leading-tight">
+          <h2 className="text-3xl font-semibold text-foreground leading-tight font-heading">
             Hi,{" "}
             <span className="text-foreground font-bold">
               {userName || "there"}
