@@ -17,6 +17,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { Badge } from "./ui/badge";
+import ModeToggle from "./ModeToggle";
 
 interface NavbarProps {
   className?: string;
@@ -24,7 +25,7 @@ interface NavbarProps {
 
 export default function Navbar({ className }: NavbarProps) {
   const { signOut } = useClerk();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -57,18 +58,16 @@ export default function Navbar({ className }: NavbarProps) {
           </AnimatedShinyText>
         </Link>
         <div className="flex gap-5">
-          <div className="flex items-center gap-5">
-            {!isOnDashboard && (
-              <Link href="/dashboard">
-                <Button>Dashboard</Button>
-              </Link>
-            )}
+          <div className="flex items-center gap-2 md:gap-4 lg:gap-5">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="gap-2 p-0 md:px-2.5 md:py-1.5 aspect-square sm:aspect-auto"
+                  className={cn(
+                    "gap-2 p-0 md:px-2.5 md:py-1.5 aspect-square sm:aspect-auto transition-opacity duration-150 ease-in",
+                    !isLoaded && "opacity-0"
+                  )}
                 >
                   <Avatar className="h-5 w-5 flex-shrink-0">
                     <AvatarImage src={user?.imageUrl || undefined} />
@@ -190,6 +189,7 @@ export default function Navbar({ className }: NavbarProps) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <ModeToggle />
           </div>
         </div>
       </div>
