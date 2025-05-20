@@ -12,14 +12,11 @@ export default async function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <Navbar />
-      <main className="flex-1 container mx-auto py-8 px-4 md:px-6">
-        <DashboardContent
-          userId={userId ?? ""}
-          userName={user?.firstName ?? ""}
-        />
-      </main>
-    </div>
+    <main className="max-h-full flex flex-col flex-1 py-8">
+      <DashboardContent
+        userId={userId ?? ""}
+        userName={user?.firstName ?? ""}
+      />
+    </main>
   )
 }
