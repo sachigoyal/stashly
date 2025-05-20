@@ -32,6 +32,7 @@ import {
 import { Card } from "./ui/card";
 import FileAction from "./FileAction";
 import FileIcon from "./FileIcon";
+import { cn } from "@/lib/utils";
 
 // Define the file type from the schema
 type FileType = InferSelectModel<typeof files>;
@@ -301,8 +302,6 @@ export default function FileList({
   const navigateToFolder = (folderId: string, folderName: string) => {
     setCurrentFolder(folderId);
     setFolderPath([...folderPath, { id: folderId, name: folderName }]);
-
-    // Notify parent component about folder change
     if (onFolderChange) {
       onFolderChange(folderId);
     }
@@ -317,7 +316,6 @@ export default function FileList({
         newPath.length > 0 ? newPath[newPath.length - 1].id : null;
       setCurrentFolder(newFolderId);
 
-      // Notify parent component about folder change
       if (onFolderChange) {
         onFolderChange(newFolderId);
       }
@@ -359,7 +357,7 @@ export default function FileList({
     return <FileLoadingState />;
   }
   return (
-    <div className="space-y-6 bg-background rounded-lg shadow-sm p-4 border">
+    <div className="space-y-6 bg-background/30 rounded-xl shadow-sm p-2 md:p-4 border-x-0 md:border-x border">
       <FileTab
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -387,123 +385,127 @@ export default function FileList({
           onEmptyTrash={() => setEmptyTrashModalOpen(true)}
         />
       </div>
-      <Separator className="my-4" />      {filteredFiles.length === 0 ? (
+      <Separator className="my-4" />
+      {filteredFiles.length === 0 ? (
         <FileEmptyState activeTab={activeTab} />
       ) : (
-        <Card className="border bg-card/50 overflow-hidden shadow-sm rounded-xl">
-          <div className="overflow-x-auto">            <Table className="min-w-full">
-            <TableHeader>
-              <TableRow className="bg-muted/50">
-                <TableHead>Name</TableHead>
-                <TableHead className="hidden sm:table-cell">Type</TableHead>
-                <TableHead className="hidden md:table-cell">Size</TableHead>
-                <TableHead className="hidden sm:table-cell">Added</TableHead>
-                <TableHead className="w-60">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredFiles.map((file) => (
-                <TableRow
-                  key={file.id}
-                  className={`hover:bg-muted/50 transition-colors ${file.isFolder || file.type.startsWith("image/")
-                    ? "cursor-pointer"
-                    : ""
-                    }`}
-                  onClick={() => handleItemClick(file)}
-                >
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <FileIcon file={file} />
-                      <div>
-                        <div className="font-medium flex items-center gap-2 text-foreground">
-                          <span className="truncate max-w-[150px] sm:max-w-[200px] md:max-w-[300px]">
-                            {file.name}
-                          </span>{file.isStarred && (
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Star
-                                    className="h-4 w-4 text-yellow-400"
-                                    fill="currentColor"
-                                  />
-                                </TooltipTrigger>
-                                <TooltipContent>Starred</TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          )}
-                          {file.isFolder && (
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Folder className="h-3 w-3 text-muted-foreground" />
-                                </TooltipTrigger>
-                                <TooltipContent>Folder</TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          )}
-                          {file.type.startsWith("image/") && (
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <ExternalLink className="h-3 w-3 text-muted-foreground" />
-                                </TooltipTrigger>
-                                <TooltipContent>Click to view image</TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          )}
+        <Card className="border bg-card/50 overflow-hidden shadow-sm rounded-lg py-0">
+          <div className="overflow-x-auto">
+            <Table className="min-w-full">
+              <TableHeader className="sticky top-0 z-10">
+                <TableRow className="bg-muted/50">
+                  <TableHead>Name</TableHead>
+                  <TableHead className="hidden sm:table-cell">Type</TableHead>
+                  <TableHead className="hidden md:table-cell">Size</TableHead>
+                  <TableHead className="hidden sm:table-cell">Added</TableHead>
+                  <TableHead className="w-60 md:w-[300px] lg:w-[350px]">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredFiles.map((file) => (
+                  <TableRow
+                    key={file.id}
+                    className={cn(
+                      "hover:bg-muted/50 transition-colors",
+                      {
+                        "cursor-pointer": file.isFolder || file.type.startsWith("image/")
+                      }
+                    )}
+                    onClick={() => handleItemClick(file)}
+                  >
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <FileIcon file={file} />
+                        <div>
+                          <div className="font-medium flex items-center gap-2 text-foreground">
+                            <span className="truncate max-w-[150px] sm:max-w-[200px] md:max-w-[300px]">
+                              {file.name}
+                            </span>{file.isStarred && (
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Star
+                                      className="h-4 w-4 text-yellow-400"
+                                      fill="currentColor"
+                                    />
+                                  </TooltipTrigger>
+                                  <TooltipContent>Starred</TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            )}
+                            {file.isFolder && (
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Folder className="h-3 w-3 text-muted-foreground" />
+                                  </TooltipTrigger>
+                                  <TooltipContent>Folder</TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            )}
+                            {file.type.startsWith("image/") && (
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                                  </TooltipTrigger>
+                                  <TooltipContent>Click to view image</TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            )}
+                          </div>
+                          <div className="text-xs text-muted-foreground sm:hidden">
+                            {formatDistanceToNow(new Date(file.createdAt), {
+                              addSuffix: true,
+                            })}
+                          </div>
                         </div>
-                        <div className="text-xs text-muted-foreground sm:hidden">
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <div className="text-xs text-muted-foreground">
+                        {file.isFolder ? "Folder" : file.type}
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      <div className="text-foreground">
+                        {file.isFolder
+                          ? "-"
+                          : file.size < 1024
+                            ? `${file.size} B`
+                            : file.size < 1024 * 1024
+                              ? `${(file.size / 1024).toFixed(1)} KB`
+                              : `${(file.size / (1024 * 1024)).toFixed(1)} MB`}
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <div>
+                        <div className="text-foreground">
                           {formatDistanceToNow(new Date(file.createdAt), {
                             addSuffix: true,
                           })}
                         </div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          {format(new Date(file.createdAt), "MMMM d, yyyy")}
+                        </div>
                       </div>
-                    </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <div className="text-xs text-muted-foreground">
-                      {file.isFolder ? "Folder" : file.type}
-                    </div>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    <div className="text-foreground">
-                      {file.isFolder
-                        ? "-"
-                        : file.size < 1024
-                          ? `${file.size} B`
-                          : file.size < 1024 * 1024
-                            ? `${(file.size / 1024).toFixed(1)} KB`
-                            : `${(file.size / (1024 * 1024)).toFixed(1)} MB`}
-                    </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <div>
-                      <div className="text-foreground">
-                        {formatDistanceToNow(new Date(file.createdAt), {
-                          addSuffix: true,
-                        })}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {format(new Date(file.createdAt), "MMMM d, yyyy")}
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell onClick={(e) => e.stopPropagation()}>
-                    <FileAction
-                      file={file}
-                      onStar={handleStarFile}
-                      onTrash={handleTrashFile}
-                      onDelete={(file) => {
-                        setSelectedFile(file);
-                        setDeleteModalOpen(true);
-                      }}
-                      onDownload={handleDownloadFile}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                    </TableCell>
+                    <TableCell onClick={(e) => e.stopPropagation()}>
+                      <FileAction
+                        file={file}
+                        onStar={handleStarFile}
+                        onTrash={handleTrashFile}
+                        onDelete={(file) => {
+                          setSelectedFile(file);
+                          setDeleteModalOpen(true);
+                        }}
+                        onDownload={handleDownloadFile}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </Card>
       )}
