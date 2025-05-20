@@ -4,6 +4,7 @@ import { files } from "@/lib/db/schema";
 import { Star, Trash, X, ArrowUpFromLine, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { InferSelectModel } from "drizzle-orm";
+import { cn } from "@/lib/utils";
 
 // Define the file type from the schema
 type FileType = InferSelectModel<typeof files>;
@@ -19,13 +20,12 @@ interface FileActionsProps {
 export default function FileAction({ file, onStar, onTrash, onDelete, onDownload }: FileActionsProps) {
   return (
     <div className="flex flex-wrap gap-2 justify-end">
-      {/* Download button */}
       {!file.isTrash && !file.isFolder && (
         <Button
           variant="outline"
           size="sm"
           onClick={() => onDownload(file)}
-          className="cursor-pointer shadow-sm hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-colors"
+          className="cursor-pointer"
           aria-label="Download file"
         >
           <Download className="h-4 w-4" />
@@ -33,17 +33,16 @@ export default function FileAction({ file, onStar, onTrash, onDelete, onDownload
         </Button>
       )}
       
-      {/* Star button */}
       {!file.isTrash && (
         <Button
           variant="outline"
           size="sm"
           onClick={() => onStar(file.id)}
-          className={`cursor-pointer shadow-sm transition-colors ${
+          className={cn(
+            "cursor-pointer shadow-sm transition-colors",
             file.isStarred 
-              ? "border-yellow-200 hover:bg-yellow-50 dark:hover:bg-yellow-950/20" 
-              : "hover:bg-gray-100 dark:hover:bg-gray-800"
-          }`}
+              && "border-yellow-200 hover:bg-yellow-50 dark:hover:bg-yellow-950/20" 
+          )}
           aria-label={file.isStarred ? "Unstar file" : "Star file"}
         >
           <Star
@@ -58,8 +57,7 @@ export default function FileAction({ file, onStar, onTrash, onDelete, onDownload
           </span>
         </Button>
       )}
-      
-      {/* Trash/Restore button */}
+
       <Button
         variant="outline"
         size="sm"
@@ -81,7 +79,6 @@ export default function FileAction({ file, onStar, onTrash, onDelete, onDownload
         </span>
       </Button>
       
-      {/* Delete permanently button */}
       {file.isTrash && (
         <Button
           variant="outline"
