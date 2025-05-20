@@ -121,9 +121,8 @@ export default function FileList({
       toast.success(
         file?.isStarred ? "Removed from Starred" : "Added to Starred",
         {
-          description: `"${file?.name}" has been ${
-            file?.isStarred ? "removed from" : "added to"
-          } your starred files`,
+          description: `"${file?.name}" has been ${file?.isStarred ? "removed from" : "added to"
+            } your starred files`,
         }
       );
     } catch (error) {
@@ -150,9 +149,8 @@ export default function FileList({
       toast.success(
         responseData.isTrash ? "Moved to Trash" : "Restored from Trash",
         {
-          description: `"${file?.name}" has been ${
-            responseData.isTrash ? "moved to trash" : "restored"
-          }`,
+          description: `"${file?.name}" has been ${responseData.isTrash ? "moved to trash" : "restored"
+            }`,
         }
       );
     } catch (error) {
@@ -394,149 +392,153 @@ export default function FileList({
       ) : (
         <Card className="border bg-card/50 overflow-hidden shadow-sm rounded-xl">
           <div className="overflow-x-auto">            <Table className="min-w-full">
-              <TableHeader>
-                <TableRow className="bg-muted/50">
-                  <TableHead>Name</TableHead>
-                  <TableHead className="hidden sm:table-cell">Type</TableHead>
-                  <TableHead className="hidden md:table-cell">Size</TableHead>
-                  <TableHead className="hidden sm:table-cell">Added</TableHead>
-                  <TableHead className="w-60">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredFiles.map((file) => (                  <TableRow
-                    key={file.id}
-                    className={`hover:bg-muted/50 transition-colors ${
-                      file.isFolder || file.type.startsWith("image/")
-                        ? "cursor-pointer"
-                        : ""
+            <TableHeader>
+              <TableRow className="bg-muted/50">
+                <TableHead>Name</TableHead>
+                <TableHead className="hidden sm:table-cell">Type</TableHead>
+                <TableHead className="hidden md:table-cell">Size</TableHead>
+                <TableHead className="hidden sm:table-cell">Added</TableHead>
+                <TableHead className="w-60">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredFiles.map((file) => (
+                <TableRow
+                  key={file.id}
+                  className={`hover:bg-muted/50 transition-colors ${file.isFolder || file.type.startsWith("image/")
+                    ? "cursor-pointer"
+                    : ""
                     }`}
-                    onClick={() => handleItemClick(file)}
-                  >
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <FileIcon file={file} />
-                        <div>                          <div className="font-medium flex items-center gap-2 text-foreground">
-                            <span className="truncate max-w-[150px] sm:max-w-[200px] md:max-w-[300px]">
-                              {file.name}
-                            </span>{file.isStarred && (
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Star
-                                      className="h-4 w-4 text-yellow-400"
-                                      fill="currentColor"
-                                    />
-                                  </TooltipTrigger>
-                                  <TooltipContent>Starred</TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            )}
-                            {file.isFolder && (
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Folder className="h-3 w-3 text-muted-foreground" />
-                                  </TooltipTrigger>
-                                  <TooltipContent>Folder</TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            )}
-                            {file.type.startsWith("image/") && (
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
-                                  </TooltipTrigger>
-                                  <TooltipContent>Click to view image</TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            )}
-                          </div>                          <div className="text-xs text-muted-foreground sm:hidden">
-                            {formatDistanceToNow(new Date(file.createdAt), {
-                              addSuffix: true,
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    </TableCell>                    <TableCell className="hidden sm:table-cell">
-                      <div className="text-xs text-muted-foreground">
-                        {file.isFolder ? "Folder" : file.type}
-                      </div>
-                    </TableCell>                    <TableCell className="hidden md:table-cell">
-                      <div className="text-foreground">
-                        {file.isFolder
-                          ? "-"
-                          : file.size < 1024
-                            ? `${file.size} B`
-                            : file.size < 1024 * 1024
-                              ? `${(file.size / 1024).toFixed(1)} KB`
-                              : `${(file.size / (1024 * 1024)).toFixed(1)} MB`}
-                      </div>
-                    </TableCell>                    <TableCell className="hidden sm:table-cell">
+                  onClick={() => handleItemClick(file)}
+                >
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      <FileIcon file={file} />
                       <div>
-                        <div className="text-foreground">
+                        <div className="font-medium flex items-center gap-2 text-foreground">
+                          <span className="truncate max-w-[150px] sm:max-w-[200px] md:max-w-[300px]">
+                            {file.name}
+                          </span>{file.isStarred && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Star
+                                    className="h-4 w-4 text-yellow-400"
+                                    fill="currentColor"
+                                  />
+                                </TooltipTrigger>
+                                <TooltipContent>Starred</TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                          {file.isFolder && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Folder className="h-3 w-3 text-muted-foreground" />
+                                </TooltipTrigger>
+                                <TooltipContent>Folder</TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                          {file.type.startsWith("image/") && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                                </TooltipTrigger>
+                                <TooltipContent>Click to view image</TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                        </div>
+                        <div className="text-xs text-muted-foreground sm:hidden">
                           {formatDistanceToNow(new Date(file.createdAt), {
                             addSuffix: true,
                           })}
                         </div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          {format(new Date(file.createdAt), "MMMM d, yyyy")}
-                        </div>
                       </div>
-                    </TableCell>
-                    <TableCell onClick={(e) => e.stopPropagation()}>
-                      <FileAction
-                        file={file}
-                        onStar={handleStarFile}
-                        onTrash={handleTrashFile}
-                        onDelete={(file) => {
-                          setSelectedFile(file);
-                          setDeleteModalOpen(true);
-                        }}
-                        onDownload={handleDownloadFile}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                    </div>
+                  </TableCell>
+                  <TableCell className="hidden sm:table-cell">
+                    <div className="text-xs text-muted-foreground">
+                      {file.isFolder ? "Folder" : file.type}
+                    </div>
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <div className="text-foreground">
+                      {file.isFolder
+                        ? "-"
+                        : file.size < 1024
+                          ? `${file.size} B`
+                          : file.size < 1024 * 1024
+                            ? `${(file.size / 1024).toFixed(1)} KB`
+                            : `${(file.size / (1024 * 1024)).toFixed(1)} MB`}
+                    </div>
+                  </TableCell>
+                  <TableCell className="hidden sm:table-cell">
+                    <div>
+                      <div className="text-foreground">
+                        {formatDistanceToNow(new Date(file.createdAt), {
+                          addSuffix: true,
+                        })}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1">
+                        {format(new Date(file.createdAt), "MMMM d, yyyy")}
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
+                    <FileAction
+                      file={file}
+                      onStar={handleStarFile}
+                      onTrash={handleTrashFile}
+                      onDelete={(file) => {
+                        setSelectedFile(file);
+                        setDeleteModalOpen(true);
+                      }}
+                      onDownload={handleDownloadFile}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
           </div>
         </Card>
-      )}    
+      )}
 
-          <ConfirmationModal
-            isOpen={deleteModalOpen}
-            onOpenChange={setDeleteModalOpen}
-            title="Confirm Permanent Deletion"
-            description={`Are you sure you want to permanently delete this file?`}
-            icon={X}
-            iconColor="text-danger"
-            confirmText="Delete Permanently"
-            confirmColor="danger"
-            onConfirm={() => {
-              if (selectedFile) {
-                handleDeleteFile(selectedFile.id);
-              }
-            }}
-            isDangerous={true}
-            warningMessage={`You are about to permanently delete "${selectedFile?.name}". This file will be permanently removed from your account and cannot be recovered.`}
-          />
+      <ConfirmationModal
+        isOpen={deleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        title="Confirm Permanent Deletion"
+        description={`Are you sure you want to permanently delete this file?`}
+        icon={X}
+        iconColor="text-danger"
+        confirmText="Delete Permanently"
+        confirmColor="danger"
+        onConfirm={() => {
+          if (selectedFile) {
+            handleDeleteFile(selectedFile.id);
+          }
+        }}
+        isDangerous={true}
+        warningMessage={`You are about to permanently delete "${selectedFile?.name}". This file will be permanently removed from your account and cannot be recovered.`}
+      />
 
-          <ConfirmationModal
-            isOpen={emptyTrashModalOpen}
-            onOpenChange={setEmptyTrashModalOpen}
-            title="Empty Trash"
-            description={`Are you sure you want to empty the trash?`}
-            icon={Trash}
-            iconColor="text-danger"
-            confirmText="Empty Trash"
-            confirmColor="danger"
-            onConfirm={handleEmptyTrash}
-            isDangerous={true}
-            warningMessage={`You are about to permanently delete all ${trashCount} items in your trash. These files will be permanently removed from your account and cannot be recovered.`}
-          />
-    
+      <ConfirmationModal
+        isOpen={emptyTrashModalOpen}
+        onOpenChange={setEmptyTrashModalOpen}
+        title="Empty Trash"
+        description={`Are you sure you want to empty the trash?`}
+        icon={Trash}
+        iconColor="text-danger"
+        confirmText="Empty Trash"
+        confirmColor="danger"
+        onConfirm={handleEmptyTrash}
+        isDangerous={true}
+        warningMessage={`You are about to permanently delete all ${trashCount} items in your trash. These files will be permanently removed from your account and cannot be recovered.`}
+      />
     </div>
   );
 }

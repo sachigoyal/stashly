@@ -17,14 +17,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "./ui/input";
-import { Mail, User } from "lucide-react";
+import { Loader2, Mail, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { Lock, Eye, EyeOff, AlertCircle } from "lucide-react";
 import Link from "next/link";
@@ -142,9 +141,10 @@ export default function SignUpForm() {
 
                 <Button
                   type="submit"
-                  className="w-full py-2"
+                  className="w-full cursor-pointer gap-2"
                   disabled={isSubmitting}
                 >
+                  {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                   {isSubmitting ? "Verifying..." : "Verify Email"}
                 </Button>
 
@@ -326,7 +326,8 @@ export default function SignUpForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full cursor-pointer" disabled={isSubmitting}>
+              <Button type="submit" className="w-full cursor-pointer gap-2" disabled={isSubmitting}>
+                {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isSubmitting ? "Creating account..." : "Create Account"}
               </Button>
             </form>

@@ -7,15 +7,11 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ImageKitProvider } from "imagekitio-next";
 import { useRouter } from "next/navigation";
 import { createContext, useContext } from "react";
-
 export interface ProvidersProps {
   children: React.ReactNode;
   themeProps?: ThemeProviderProps;
 }
 
-
-
-// Create a context for ImageKit authentication
 export const ImageKitAuthContext = createContext<{
   authenticate: () => Promise<{
     signature: string;
@@ -28,7 +24,6 @@ export const ImageKitAuthContext = createContext<{
 
 export const useImageKitAuth = () => useContext(ImageKitAuthContext);
 
-// ImageKit authentication function
 const authenticator = async () => {
   try {
     const response = await fetch("/api/imagekit-auth");
@@ -40,22 +35,18 @@ const authenticator = async () => {
   }
 };
 
-
 export function Providers({ children, themeProps }: ProvidersProps) {
-  const router = useRouter();
-
   return (
-    
-      <ImageKitProvider
-        authenticator={authenticator}
-        publicKey={process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || ""}
-        urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || ""}
-      >
-        <ImageKitAuthContext.Provider value={{ authenticate: authenticator }}>
-          
-          <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-        </ImageKitAuthContext.Provider>
-      </ImageKitProvider>
-   
+    <ImageKitProvider
+      authenticator={authenticator}
+      publicKey={process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || ""}
+      urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || ""}
+    >
+      <ImageKitAuthContext.Provider value={{ authenticate: authenticator }}>
+
+        <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+      </ImageKitAuthContext.Provider>
+    </ImageKitProvider>
+
   );
 }

@@ -10,7 +10,7 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { AlertCircle, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { AlertCircle, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signInSchema } from "@/schema/signInSchema";
@@ -42,7 +42,6 @@ export default function SignInForm() {
       password: "",
     },
   });
-  const { handleSubmit } = form;
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
     if (!isLoaded) return;
     setIsSubmitting(true);
@@ -69,7 +68,7 @@ export default function SignInForm() {
   };
   return (
     <div className="w-full flex justify-center items-center p-5">
-      <Card className="w-full max-w-md shadow-md">
+      <Card className="w-full max-w-xl shadow-md">
         <CardHeader>
           <CardTitle className="text-3xl font-semibold">Sign In</CardTitle>
           <CardDescription>
@@ -78,7 +77,7 @@ export default function SignInForm() {
         </CardHeader>
         <CardContent>
           {authError && (
-            <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-4 flex items-center gap-2">
+            <div className="bg-destructive/10 text-destructive p-4 rounded-lg mb-4 flex items-center gap-2">
               <AlertCircle className="h-5 w-5 flex-shrink-0" />
               <span>{authError}</span>
             </div>
@@ -145,9 +144,10 @@ export default function SignInForm() {
 
               <Button
                 type="submit"
-                className="w-full cursor-pointer"
+                className="w-full cursor-pointer gap-2"
                 disabled={isSubmitting}
               >
+                {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isSubmitting ? "Signing in..." : "Sign In"}
               </Button>
             </form>
