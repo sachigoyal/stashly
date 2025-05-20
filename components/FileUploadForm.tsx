@@ -118,11 +118,11 @@ export default function FileUploadForm({
         description: `${file.name} has been uploaded successfully.`,
       });
 
-      // Clear the file after successful upload
+
       clearFile();
       setUploading(false);
 
-      // Call the onUploadSuccess callback if provided
+     
       if (onUploadSuccess) {
         onUploadSuccess();
       }
@@ -150,7 +150,7 @@ export default function FileUploadForm({
     setCreatingFolder(true);
 
     try {
-      await axios.post("/api/folders/create", {
+      await axios.post("/api/folder/create", {
         name: folderName.trim(),
         userId: userId,
         parentId: currentFolder,
@@ -162,7 +162,7 @@ export default function FileUploadForm({
       setFolderName("");
       setFolderModalOpen(false);
 
-      // Call the onUploadSuccess callback to refresh the file list
+      
       if (onUploadSuccess) {
         onUploadSuccess();
       }
