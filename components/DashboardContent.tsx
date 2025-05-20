@@ -1,13 +1,19 @@
 "use client"
 
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
-import { Card, CardHeader, CardContent } from "./ui/card";
-import { FileUp, FileText, User } from "lucide-react"
+import { useState, useCallback } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "./ui/card";
+import { FileText, Plus } from "lucide-react"
+import { Button } from "./ui/button";
 import FileUploadForm from "./FileUploadForm";
 import FileList from "./FileList";
-import UserProfile from "./UserProfile";
 
 interface DashboardContentProps {
   userId: string;
@@ -15,23 +21,14 @@ interface DashboardContentProps {
 }
 
 export default function DashboardContent({ userId, userName }: DashboardContentProps) {
-  const searchparams = useSearchParams();
-  const tabParam = searchparams.get("tab");
-
-  const [activeTab, setActiveTab] = useState<string>("files");
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [currentFolder, setCurrentFolder] = useState<string | null>(null);
+  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
 
-  useEffect(() => {
-    if (tabParam === "profile") {
-      setActiveTab("profile");
-    } else {
-      setActiveTab("files");
-    }
-  }, [tabParam]);
 
   const handleFileUploadSuccess = useCallback(() => {
     setRefreshTrigger((prev) => prev + 1);
+    setIsUploadDialogOpen(false);
   }, []);
 
   const handleFolderChange = useCallback((folderId: string | null) => {
@@ -39,77 +36,63 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
   }, []);
 
   return (
-    <div className="w-full max-w-screen-2xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-semibold text-foreground leading-tight">
-          Hi,{" "}
-          <span className="text-foreground font-bold">
-            {userName || "there"}
-          </span>
-          !
-        </h2>
-        <p className="text-muted-foreground mt-2 text-base">
-          Your images are waiting for you.
-        </p>
-      </div>
-      <Tabs
-        aria-label="Dashboard Tabs"
-        defaultValue={activeTab}
-        value={activeTab}
-        onValueChange={setActiveTab}
-        className="w-full"
-      >
-        <TabsList className="flex w-full border-b space-x-6 bg-transparent h-auto px-0">
-          <TabsTrigger value="files" className="flex items-center gap-3 py-3 px-0 h-auto bg-transparent rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:rounded-lg cursor-pointer">
-            <FileText className="h-5 w-5" />
-            <span className="font-medium">My Files</span>
-          </TabsTrigger>
-          <TabsTrigger value="profile" className="flex items-center gap-3 py-3 px-0 h-auto bg-transparent rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:rounded-lg cursor-pointer">
-            <User className="h-5 w-5" />
-            <span className="font-medium">Profile</span>
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="files">
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1">
-              <Card className="bg-card border shadow-sm hover:shadow-md transition-shadow p-0">
-                <CardHeader className="flex gap-3 p-6 pb-3">
-                  <FileUp className="h-5 w-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Upload</h2>
-                </CardHeader>
-                <CardContent className="p-6 pt-2">
-                  <FileUploadForm
-                    userId={userId}
-                    onUploadSuccess={handleFileUploadSuccess}
-                    currentFolder={currentFolder}
-                  />
-                </CardContent>
-              </Card>
-            </div>
-            <div className="lg:col-span-2">
-              <Card className="bg-card border shadow-sm hover:shadow-md transition-shadow p-0">
-                <CardHeader className="flex gap-3 p-6 pb-3">
-                  <FileText className="h-5 w-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Your Files</h2>
-                </CardHeader>
-                <CardContent className="p-6 pt-2">
-                  <FileList
-                    userId={userId}
-                    refreshTrigger={refreshTrigger}
-                    onFolderChange={handleFolderChange}
-                  />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </TabsContent>
+    <div className="w-full mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h2 className="text-3xl font-semibold text-foreground leading-tight">
+            Hi,{" "}
+            <span className="text-foreground font-bold">
+              {userName || "there"}
+            </span>
+          </h2>
+          <p className="text-muted-foreground mt-1 text-base">
+            Your images are waiting for you.
+          </p>
+        </div>
 
-        <TabsContent value="profile">
-          <div className="mt-8">
-            <UserProfile />
-          </div>
-        </TabsContent>
-      </Tabs>
+        <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Upload
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-xl">
+            <DialogHeader>
+              <DialogTitle>Upload Files</DialogTitle>
+              <DialogDescription>
+                Upload images to your personal storage
+              </DialogDescription>
+            </DialogHeader>
+            <FileUploadForm
+              userId={userId}
+              onUploadSuccess={handleFileUploadSuccess}
+              currentFolder={currentFolder}
+            />
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <Card className="pb-0 pt-4 md:py-4 lg:py-6">
+        <CardHeader className="px-2 md:px-4 lg:px-6">
+          <CardTitle className="text-xl md:text-2xl lg:text-3xl">
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              <h2 className="text-xl font-semibold">Your Files</h2>
+            </div>
+          </CardTitle>
+          <CardDescription>
+            Upload, delete, and manage your files
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="px-0 md:px-4 lg:px-6">
+          <FileList
+            userId={userId}
+            refreshTrigger={refreshTrigger}
+            onFolderChange={handleFolderChange}
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 }
