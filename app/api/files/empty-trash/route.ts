@@ -3,14 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { files } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import ImageKit from "imagekit";
-
-// Initialize ImageKit with your credentials
-const imagekit = new ImageKit({
-  publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || "",
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY || "",
-  urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || "",
-});
+import { imagekit } from "@/lib/imagekit";
 
 export async function DELETE() {
   try {
@@ -19,7 +12,6 @@ export async function DELETE() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Get all files in trash for this user
     const trashedFiles = await db
       .select()
       .from(files)
@@ -32,9 +24,8 @@ export async function DELETE() {
       );
     }
 
-    // Delete files from ImageKit
     const deletePromises = trashedFiles
-      .filter((file) => !file.isFolder) // Skip folders
+      .filter((file) => !file.isFolder)
       .map(async (file) => {
         try {
           let imagekitFileId = null;
@@ -77,7 +68,6 @@ export async function DELETE() {
         }
       });
 
-    // Wait for all ImageKit deletions to complete (or fail)
     await Promise.allSettled(deletePromises);
 
     // Delete all trashed files from the database

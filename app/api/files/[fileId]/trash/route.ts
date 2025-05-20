@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { files } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
+import { imagekit } from "@/lib/imagekit";
 
 export async function PATCH(
   request: NextRequest,
@@ -31,7 +32,6 @@ export async function PATCH(
       return NextResponse.json({ error: "File not found" }, { status: 404 });
     }
 
-    
     const [updatedFile] = await db
       .update(files)
       .set({ isTrash: !file.isTrash })

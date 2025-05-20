@@ -3,15 +3,8 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { files } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import ImageKit from "imagekit";
 import { v4 as uuidv4 } from "uuid";
-
-// Initialize ImageKit with your credentials
-const imagekit = new ImageKit({
-  publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || "",
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY || "",
-  urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || "",
-});
+import { imagekit } from "@/lib/imagekit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,7 +18,6 @@ export async function POST(request: NextRequest) {
     const formUserId = formData.get("userId") as string;
     const parentId = (formData.get("parentId") as string) || null;
 
-    // Verify the user is uploading to their own account
     if (formUserId !== userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -34,7 +26,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Check if parent folder exists if parentId is provided
     if (parentId) {
       const [parentFolder] = await db
         .select()
@@ -55,7 +46,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Only allow image uploads
     if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
       return NextResponse.json(
         { error: "Only image files are supported" },
@@ -70,7 +60,6 @@ export async function POST(request: NextRequest) {
     const fileExtension = originalFilename.split(".").pop() || "";
     const uniqueFilename = `${uuidv4()}.${fileExtension}`;
 
-    // Create folder path based on parent folder if exists
     const folderPath = parentId
       ? `/droply/${userId}/folders/${parentId}`
       : `/droply/${userId}`;

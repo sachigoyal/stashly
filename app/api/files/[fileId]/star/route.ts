@@ -9,7 +9,6 @@ export async function PATCH(
   props: { params: Promise<{ fileId: string }> }
 ) {
   try {
-
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -24,7 +23,6 @@ export async function PATCH(
       );
     }
 
- 
     const [file] = await db
       .select()
       .from(files)
