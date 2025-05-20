@@ -29,10 +29,16 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   creator: siteConfig.name,
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
+  icons: [
+    {
+      url: "/favicon-light.png",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      url: "/favicon-dark.png",
+      media: "(prefers-color-scheme: dark)",
+    },
+  ],
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
