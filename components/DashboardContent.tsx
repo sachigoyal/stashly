@@ -38,14 +38,13 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
     setCurrentFolder(folderId);
   }, []);
 
-return (    <div className="w-full max-w-screen-2xl mx-auto">
+  return (
+    <div className="w-full max-w-screen-2xl mx-auto">
       <div className="mb-8">
         <h2 className="text-3xl font-semibold text-foreground leading-tight">
           Hi,{" "}
-          <span className="text-primary font-bold">
-            {userName?.length > 10
-              ? `${userName?.substring(0, 10)}...`
-              : userName?.split(" ")[0] || "there"}
+          <span className="text-foreground font-bold">
+            {userName || "there"}
           </span>
           !
         </h2>
@@ -53,7 +52,7 @@ return (    <div className="w-full max-w-screen-2xl mx-auto">
           Your images are waiting for you.
         </p>
       </div>
-      <Tabs 
+      <Tabs
         aria-label="Dashboard Tabs"
         defaultValue={activeTab}
         value={activeTab}
@@ -98,7 +97,8 @@ return (    <div className="w-full max-w-screen-2xl mx-auto">
                     userId={userId}
                     refreshTrigger={refreshTrigger}
                     onFolderChange={handleFolderChange}
-                  />                </CardContent>
+                  />
+                </CardContent>
               </Card>
             </div>
           </div>

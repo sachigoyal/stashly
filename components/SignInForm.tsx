@@ -42,11 +42,7 @@ export default function SignInForm() {
       password: "",
     },
   });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { handleSubmit } = form;
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
     if (!isLoaded) return;
     setIsSubmitting(true);
@@ -73,7 +69,7 @@ export default function SignInForm() {
   };
   return (
     <div className="w-full flex justify-center items-center p-5">
-      <Card className="w-full max-w-md shadow-md border border-gray-100">
+      <Card className="w-full max-w-md shadow-md">
         <CardHeader>
           <CardTitle className="text-3xl font-semibold">Sign In</CardTitle>
           <CardDescription>
@@ -159,9 +155,9 @@ export default function SignInForm() {
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link href="/sign-up" className="text-black hover:underline">
-            Sign Up
+            Don&apos;t have an account?{" "}
+            <Link href="/sign-up" className="text-foreground hover:underline">
+              Sign Up
             </Link>
           </p>
         </CardFooter>
