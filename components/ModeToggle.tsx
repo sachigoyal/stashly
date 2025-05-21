@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 
 type ModeToggleProps = {
   className?: string;
+  variant?: "outline" | "default" | "ghost";
+  size?: "default" | "sm" | "lg" | "icon" | null | undefined;
 }
 
-export default function ModeToggle({ className }: ModeToggleProps) {
+export default function ModeToggle({ className, variant = "outline", size = "lg" }: ModeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [systemTheme, setSystemTheme] = useState<"light" | "dark">("light");
 
@@ -54,8 +56,8 @@ export default function ModeToggle({ className }: ModeToggleProps) {
   return (
     <Button
       onClick={toggleTheme}
-      variant="outline"
-      size="lg"
+      variant={variant}
+      size={size}
       className={cn("aspect-square size-10", className)}
     >
       <SunIcon className="size-3 md:size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
