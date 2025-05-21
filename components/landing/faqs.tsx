@@ -1,30 +1,27 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { HelpCircle } from "lucide-react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 export default function FAQs() {
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-12 md:py-16">
+    <section id="faqs" className="w-full max-w-7xl mx-auto py-12 md:py-16">
       <div className="space-y-4 text-center mb-8">
-        <div className="mx-auto bg-muted/50 w-12 h-12 rounded-full flex items-center justify-center">
-          <HelpCircle className="h-6 w-6 text-muted-foreground" />
+        <div className="mx-auto bg-muted/50 w-12 h-12 rounded-full flex items-center justify-center icon-gradient">
+          <HelpCircle className="h-6 w-6" />
         </div>
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold font-heading">Frequently Asked Questions</h2>
         <p className="text-muted-foreground max-w-md mx-auto">Everything you need to know about Stashly and how it can help you manage your images</p>
       </div>
-      
-      <Card className="border bg-card/50 overflow-hidden shadow-sm rounded-lg p-0">
-        <CardContent className="p-0">
-          <Accordion type="multiple" className="">
-            {faqs.map((faq) => (
-              <AccordionItem key={faq.question} value={faq.question}>
-                <AccordionTrigger className="text-sm md:text-base rounded-none font-medium hover:bg-muted/30 hover:no-underline px-6 py-4">{faq.question}</AccordionTrigger>
-                <AccordionContent className="text-base text-muted-foreground px-6 py-3 whitespace-pre-wrap">{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </CardContent>
-      </Card>
+
+      <div className="border bg-card/50 overflow-hidden shadow-sm rounded-lg p-0">
+        <Accordion type="multiple" className="">
+          {faqs.map((faq) => (
+            <AccordionItem key={faq.question} value={faq.question}>
+              <AccordionTrigger className="text-sm md:text-base rounded-none font-medium hover:bg-muted/30 hover:no-underline px-6 py-4">{faq.question}</AccordionTrigger>
+              <AccordionContent className="text-base text-muted-foreground px-6 py-3 whitespace-pre-wrap">{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </section>
   )
 }
