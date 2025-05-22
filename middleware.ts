@@ -4,18 +4,18 @@ import {
 } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const isPrivateRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   const user = auth();
   const userId = (await user).userId;
   const url = new URL(request.url);
 
-  if (userId && isPublicRoute(request) && url.pathname !== "/") {
+  if (userId && !isPrivateRoute(request) && url.pathname !== "/") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (!isPublicRoute(request)) {
+  if (isPrivateRoute(request)) {
     await auth.protect();
   }
 });
