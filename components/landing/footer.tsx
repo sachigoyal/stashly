@@ -35,22 +35,22 @@ export default function Footer() {
             <div className="space-y-3 text-muted-foreground flex flex-col md:items-end">
               <h1 className="text-primary">Features</h1>
               <Link
-                href="/#upload"
+                href="/#features"
                 className="text-sm hover:text-secondary-foreground duration-75 transition-colors"
               >
                 Upload Images
               </Link>
               <Link
-                href="/#manage"
-                className="text-sm hover:text-secondary-foreground duration-75 transition-colors"
-              >
-                Image Management
-              </Link>
-              <Link
-                href="/#organize"
+                href="/#features"
                 className="text-sm hover:text-secondary-foreground duration-75 transition-colors"
               >
                 Organization
+              </Link>
+              <Link
+                href="/#features"
+                className="text-sm hover:text-secondary-foreground duration-75 transition-colors"
+              >
+                Recovery
               </Link>
             </div>
             <div className="space-y-3 text-muted-foreground flex flex-col md:items-end">
@@ -62,10 +62,10 @@ export default function Footer() {
                 FAQs
               </Link>
               <Link
-                href="/docs"
+                href="/about"
                 className="text-sm hover:text-secondary-foreground duration-75 transition-colors"
               >
-                Documentation
+                About
               </Link>
               <Link
                 href="/changelog"

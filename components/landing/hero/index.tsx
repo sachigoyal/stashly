@@ -37,7 +37,7 @@ const variant = {
 
 export default function Hero() {
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-12 md:py-16 relative">
+    <section className="w-full max-w-7xl mx-auto px-4 relative">
       <motion.div 
         className="flex flex-col items-center justify-center text-center gap-4"
         variants={container}

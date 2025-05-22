@@ -3,12 +3,12 @@ import { HelpCircle } from "lucide-react"
 
 export default function FAQs() {
   return (
-    <section id="faqs" className="w-full max-w-7xl mx-auto py-12 md:py-16">
+    <section id="faqs" className="w-full max-w-7xl mx-auto">
       <div className="space-y-4 text-center mb-8">
         <div className="mx-auto bg-muted/50 w-12 h-12 rounded-full flex items-center justify-center icon-gradient">
           <HelpCircle className="h-6 w-6" />
         </div>
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold font-heading">Frequently Asked Questions</h2>
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold font-heading tracking-tighter">Frequently Asked Questions</h2>
         <p className="text-muted-foreground max-w-md mx-auto">Everything you need to know about Stashly and how it can help you manage your images</p>
       </div>
 

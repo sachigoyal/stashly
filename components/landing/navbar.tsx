@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "motion/react";
 import Brand from "@/components/brand";
 import ModeToggle from "@/components/ModeToggle";
 import Link from "next/link";
@@ -22,6 +23,7 @@ export default function HomeNavbar() {
   const [scrollY, setScrollY] = useState(0);
   const [width, setWidth] = useState(100);
   const navRef = useRef<HTMLDivElement>(null);
+  const THRESHOLD = 1000;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -42,7 +44,7 @@ export default function HomeNavbar() {
     if (isMobile) {
       return;
     }
-    if (scrollY > 100) {
+    if (scrollY > THRESHOLD) {
       setWidth(50);
     } else {
       setWidth(100);
@@ -50,7 +52,14 @@ export default function HomeNavbar() {
   }, [scrollY, isMobile]);
 
   return (
-    <nav id="navbar" ref={navRef} style={{ width: `${width}%` }} className={cn("max-w-7xl mx-auto p-2 flex justify-between items-center bg-background/50 backdrop-blur-sm border rounded-lg transition-all transform-gpu duration-500 ease-in-out")}>
+    <motion.nav
+      id="navbar"
+      ref={navRef}
+      className={cn("max-w-7xl mx-auto p-2 flex justify-between items-center bg-background/50 backdrop-blur-sm border rounded-lg transition-all transform-gpu duration-500 ease-out")}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0, width: `${width}%` }}
+      transition={{ duration: 0.5, type: "spring", bounce: 0 }}
+    >
       <div className="flex items-center gap-4">
         <Link href="/">
           <Brand size="sm" className="pl-1" />
@@ -91,7 +100,7 @@ export default function HomeNavbar() {
         </div>
         <ModeToggle size="icon" variant="ghost" className="size-9" />
       </div>
-    </nav>
+    </motion.nav>
   )
 }
 
