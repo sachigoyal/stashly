@@ -67,4 +67,5 @@ PRs welcome! Fork the repo, create a feature branch, and submit your changes.
 
 ## License
 
-[MIT](./LICENSE.md)
+[MIT LICENCE](./LICENSE.md)
+
