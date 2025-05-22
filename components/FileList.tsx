@@ -82,10 +82,10 @@ export default function FileList({
   };
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && user) {
       fetchFiles();
     }
-  }, [refreshTrigger, currentFolder, isLoaded]);
+  }, [refreshTrigger, currentFolder, isLoaded, user]);
 
   // Filter files based on active tab
   const filteredFiles = useMemo(() => {
