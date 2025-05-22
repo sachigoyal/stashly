@@ -53,7 +53,7 @@ export default function HomeNavbar() {
     <nav id="navbar" ref={navRef} style={{ width: `${width}%` }} className={cn("max-w-7xl mx-auto p-2 flex justify-between items-center bg-background/50 backdrop-blur-sm border rounded-lg transition-all transform-gpu duration-500 ease-in-out")}>
       <div className="flex items-center gap-4">
         <Link href="/">
-          <Brand size="sm" className="pl-2" />
+          <Brand size="sm" className="pl-1" />
         </Link>
         <div className="hidden md:flex items-center gap-4">
           {navConfig.map((item) => (

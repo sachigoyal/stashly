@@ -272,7 +272,7 @@ html {
 }
 
 .icon-gradient {
-  @apply bg-radial from-blue-400 to-blue-800;
+  @apply bg-radial from-blue-200 dark:from-blue-400 to-blue-400 dark:to-blue-800;
 }
 
 ::view-transition-group(root) {

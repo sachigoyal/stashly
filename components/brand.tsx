@@ -15,7 +15,7 @@ const textSizeMap = {
 };
 
 const iconSizeMap = {
-  sm: "size-6",
+  sm: "size-5",
   md: "size-8",
   lg: "size-14",
   xl: "size-24"
