@@ -1,31 +1,71 @@
+"use client";
+
+import { motion } from "motion/react";
 import CTAButton from "@/components/cta-button";
 import { Button } from "@/components/ui/button";
 import { Layers, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import SVGAnimation from "./svg-animation";
+
+const container = {
+  hidden: {
+    opacity: 0.8,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const variant = {
+  hidden: {
+    opacity: 0,
+    y: -20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      type: "spring",
+      bounce: 0,
+    },
+  },
+};
 
 export default function Hero() {
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-12 md:py-16 relative">
-      <div className="flex flex-col items-center justify-center text-center gap-4">
-        <AnnouncementBar />
-        <div className="mt-5 text-3xl md:text-5xl lg:text-6xl font-bold font-heading tracking-tight flex flex-col items-center justify-center">
-          <h1>Your Go-to Image Storage</h1>
-          <h1 className="blue-gradient">Simple, Secure, and Fast</h1>
-        </div>
-        <p className="text-xl text-muted-foreground">
+      <motion.div 
+        className="flex flex-col items-center justify-center text-center gap-4"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={variant}>
+          <AnnouncementBar />
+        </motion.div>
+        <motion.div variants={variant} className="text-3xl md:text-5xl lg:text-6xl font-bold font-heading tracking-tight flex flex-col items-center justify-center">
+          <motion.h1>Your Go-to Image Storage</motion.h1>
+          <motion.h1 className="blue-gradient">Simple, Secure, and Fast</motion.h1>
+        </motion.div>
+        <motion.p variants={variant} className="text-xl text-muted-foreground">
           Store and share your images with ease
           <br />
           No more cluttered hard drives or slow uploads
-        </p>
-        <div id="cta" className="flex items-center justify-center gap-5 mt-2">
+        </motion.p>
+        <motion.div id="cta" variants={variant} className="flex items-center justify-center gap-5 mt-2">
           <CTAButton />
           <Button size="lg" variant="outline" asChild>
             <Link href="/about">
               Learn More
             </Link>
           </Button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+      <SVGAnimation />
     </section>
   )
 }
