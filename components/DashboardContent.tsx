@@ -14,13 +14,10 @@ import { FileText, Plus } from "lucide-react"
 import { Button } from "./ui/button";
 import FileUploadForm from "./FileUploadForm";
 import FileList from "./FileList";
+import { useUser } from "@clerk/nextjs";
 
-interface DashboardContentProps {
-  userId: string;
-  userName: string;
-}
-
-export default function DashboardContent({ userId, userName }: DashboardContentProps) {
+export default function DashboardContent() {
+  const { user } = useUser();
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [currentFolder, setCurrentFolder] = useState<string | null>(null);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
@@ -42,7 +39,7 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
           <h2 className="text-3xl font-semibold text-foreground leading-tight font-heading">
             Hi,{" "}
             <span className="text-foreground font-bold">
-              {userName || "there"}
+              {user?.firstName || "there"}
             </span>
           </h2>
           <p className="text-muted-foreground mt-1 text-base">
@@ -65,7 +62,6 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
               </DialogDescription>
             </DialogHeader>
             <FileUploadForm
-              userId={userId}
               onUploadSuccess={handleFileUploadSuccess}
               currentFolder={currentFolder}
             />
@@ -87,7 +83,6 @@ export default function DashboardContent({ userId, userName }: DashboardContentP
         </CardHeader>
         <CardContent className="px-0 md:px-4 lg:px-6">
           <FileList
-            userId={userId}
             refreshTrigger={refreshTrigger}
             onFolderChange={handleFolderChange}
           />

@@ -1,5 +1,5 @@
 import Footer from "@/components/landing/footer";
-import HomeNavbar from "@/components/landing/navbar";
+import Navbar from "@/components/landing/navbar";
 
 
 export default function MarketingLayout({
@@ -10,7 +10,7 @@ export default function MarketingLayout({
   return (
     <div className="w-full">
       <header className="sticky top-2 z-50 px-2 lg:px-0">
-        <HomeNavbar />
+        <Navbar />
       </header>
       <div className="w-full flex-1 px-2 md:px-0">
         {children}

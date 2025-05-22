@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/landing/navbar";
 
 export default function DashboardLayout({
   children,
@@ -7,8 +7,8 @@ export default function DashboardLayout({
 }) {
   return (
     <main className="relative flex flex-col h-screen">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
-        <Navbar className="container mx-auto px-2 sm:px-0 py-2 md:py-3 lg:py-4" />
+      <header className="sticky top-2 z-50 px-2 lg:px-0">
+        <Navbar dashboard className="container max-w-9xl" />
       </header>
       <div className="container mx-auto px-2 sm:px-0">
         {children}

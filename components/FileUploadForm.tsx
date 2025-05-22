@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+"use client";
 
 import React, { useState } from "react";
 import {
@@ -13,23 +13,24 @@ import {
   Info,
   Check,
 } from "lucide-react";
+import { Button } from "./ui/button";
 import { useRef } from "react";
 import { Input } from "./ui/input";
 import { Progress } from "./ui/progress";
 import axios from "axios";
 import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 interface FileUploadFormProps {
-  userId: string;
   onUploadSuccess?: () => void;
   currentFolder?: string | null;
 }
 
 export default function FileUploadForm({
-  userId,
   onUploadSuccess,
   currentFolder = null,
 }: FileUploadFormProps) {
+  const { user } = useUser();
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -92,7 +93,7 @@ export default function FileUploadForm({
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("userId", userId);
+    formData.append("userId", user?.id ?? "");
     if (currentFolder) {
       formData.append("parentId", currentFolder);
     }
@@ -154,7 +155,7 @@ export default function FileUploadForm({
     try {
       await axios.post("/api/folder/create", {
         name: folderName.trim(),
-        userId: userId,
+        userId: user?.id ?? "",
         parentId: currentFolder,
       });
 

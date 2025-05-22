@@ -33,21 +33,21 @@ import { Card } from "./ui/card";
 import FileAction from "./FileAction";
 import FileIcon from "./FileIcon";
 import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
 
 // Define the file type from the schema
 type FileType = InferSelectModel<typeof files>;
 
 interface FileListProps {
-  userId: string;
   refreshTrigger?: number;
   onFolderChange?: (folderId: string | null) => void;
 }
 
 export default function FileList({
-  userId,
   refreshTrigger,
   onFolderChange,
 }: FileListProps) {
+  const { user, isLoaded } = useUser();
   const [files, setFiles] = useState<FileType[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("all");
@@ -64,7 +64,7 @@ export default function FileList({
   const fetchFiles = async () => {
     setLoading(true);
     try {
-      let url = `/api/files?userId=${userId}`;
+      let url = `/api/files?userId=${user?.id}`;
       if (currentFolder) {
         url += `&parentId=${currentFolder}`;
       }
@@ -82,8 +82,10 @@ export default function FileList({
   };
 
   useEffect(() => {
-    fetchFiles();
-  }, [userId, refreshTrigger, currentFolder]);
+    if (isLoaded) {
+      fetchFiles();
+    }
+  }, [refreshTrigger, currentFolder, isLoaded]);
 
   // Filter files based on active tab
   const filteredFiles = useMemo(() => {
