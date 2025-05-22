@@ -5,7 +5,7 @@ import TechStack from "@/components/landing/tech-stack";
 
 export default function Home() {
   return (
-    <div className="w-full flex flex-col gap-24 md:gap-32 lg:gap-40 md:my-16">
+    <div className="w-full flex flex-col gap-24 md:gap-32 lg:gap-40 my-8 md:my-16">
       <Hero />
       <Features />
       <TechStack />

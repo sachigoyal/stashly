@@ -12,10 +12,10 @@ export default function MarketingLayout({
       <header className="sticky top-2 z-50 px-2 lg:px-0">
         <HomeNavbar />
       </header>
-      <div className="w-full flex-1">
+      <div className="w-full flex-1 px-2 md:px-0">
         {children}
       </div>
-      <div className="border-t">
+      <div className="border-t px-2 md:px-0">
         <Footer />
       </div>
     </div>

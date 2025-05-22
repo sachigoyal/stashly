@@ -51,7 +51,7 @@ export default function Hero() {
           <motion.h1>Your Go-to Image Storage</motion.h1>
           <motion.h1 className="blue-gradient">Simple, Secure, and Fast</motion.h1>
         </motion.div>
-        <motion.p variants={variant} className="text-xl text-muted-foreground">
+        <motion.p variants={variant} className="text-base md:text-xl text-muted-foreground">
           Store and share your images with ease
           <br />
           No more cluttered hard drives or slow uploads
