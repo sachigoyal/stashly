@@ -29,7 +29,7 @@ export default function AuthLayout({
                 <div
                   key={index}
                   className={cn(
-                    "relative w-full p-5 hover:bg-muted/50 transition-all duration-150 group/item border-dashed",
+                    "relative w-full p-5 hover:bg-muted/50 transition-all duration-150 group/item border-dashed cursor-default",
                     {
                       "border-b": index < features.length - 1,
                       "sm:border-b-0": index >= features.length - 2,
@@ -41,7 +41,11 @@ export default function AuthLayout({
                   )}
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="bg-primary/10 p-2 rounded-md transition-all duration-150 group-hover/item:bg-primary/20">
+                    <div className={cn(
+                      "p-2 rounded-md transition-all transform-gpu duration-150 ease-out delay-100",
+                      feature.bgColor,
+                      "group-hover/item:scale-110"
+                    )}>
                       {feature.icon}
                     </div>
                     <h3 className="text-primary font-medium text-sm">{feature.category}</h3>
@@ -73,23 +77,27 @@ const features = [
     category: "Storage",
     name: "Secure Storage",
     description: "Upload and store your cherished images in a secure and organized personal space.",
+    bgColor: "bg-blue-100 dark:bg-blue-950/40",
   },
   {
     icon: <PictureInPicture className="size-3 text-primary" />,
     category: "View",
     name: "Seamless Viewing",
     description: "Preview your images instantly with our optimized viewer for a smooth experience.",
+    bgColor: "bg-purple-100 dark:bg-purple-950/40",
   },
   {
     icon: <Star className="size-3 text-primary" />,
     category: "Organize",
     name: "Star Important Images",
     description: "Mark favorite images with stars for quick access to your most valued memories.",
+    bgColor: "bg-amber-100 dark:bg-amber-950/40",
   },
   {
     icon: <Trash2 className="size-3 text-primary" />,
     category: "Recovery",
     name: "Trash Protection",
     description: "Deleted images go to trash first with easy restoration to prevent accidental loss.",
+    bgColor: "bg-red-100 dark:bg-red-950/40",
   },
 ];
