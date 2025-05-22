@@ -1,4 +1,4 @@
-import { Code2, LayoutTemplate, Paintbrush, Component, Database, Key, Image, Blocks, Cloud, Zap, GitBranch, Shield, Server, Cpu, ScrollText, ArrowRight } from "lucide-react";
+import { Code2, LayoutTemplate, Paintbrush, Component, Database, Key, Image as ImageIcon, Blocks, Cloud, Zap, GitBranch, Shield, Server, Cpu, ScrollText, ArrowRight } from "lucide-react";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -118,7 +118,7 @@ export default function TechStack({ headless = false }: { headless?: boolean }) 
             </li>
             <li className="flex items-start gap-3">
               <div className="min-w-6 mt-1">
-                <Image className="h-5 w-5 text-teal-500" />
+                <ImageIcon className="h-5 w-5 text-teal-500" />
               </div>
               <div>
                 <p className="font-medium">ImageKit</p>
