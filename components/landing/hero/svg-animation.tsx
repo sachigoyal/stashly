@@ -52,7 +52,7 @@ export default function SVGAnimation() {
           <motion.g
             id="flow"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
             transition={{ delay: 1.25, duration: 1, type: "spring", bounce: 0 }}
           >
             <path id="Vector 100 - muted" d="M128.5 77C332.133 77 340.258 325 549.985 325" stroke="var(--muted)" strokeWidth="2" />
@@ -66,7 +66,7 @@ export default function SVGAnimation() {
           <motion.g
             id="flow-lappy"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1, type: "spring", bounce: 0 }}
           >
             <path id="mid - muted" d="M950.448 425H1219.55" stroke="var(--muted)" strokeWidth="2" />
@@ -119,7 +119,7 @@ export default function SVGAnimation() {
               <path id="top_2" d="M782 217L750 201L718 217L750 233L782 217Z" fill="#0879FE" fillOpacity="0.4" />
               <path id="base3_2" d="M782 233L750 249L718 233V217L750 233L782 217V233Z" fill="#00AAF3" fillOpacity="0.5" />
             </motion.g>
-            <g id="structure">
+            <motion.g id="structure" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
               <path id="base_2" d="M950 625V225L750 325L550 225V625L750 725L950 625Z" stroke="#044DDA" strokeLinejoin="round" />
               <path id="baseline" d="M750 325V725" stroke="#044DDA" />
               <path id="top_3" d="M750 325L550 225L750 125L950 225L750 325Z" stroke="#044DDA" strokeLinejoin="round" />
@@ -134,7 +134,7 @@ export default function SVGAnimation() {
                 <path id="cell-base" d="M782 233V217L750 233L718 217V233L750 249L782 233Z" stroke="#044DDA" strokeLinejoin="round" />
                 <path id="call-line" d="M750 233V249" stroke="#044DDA" />
               </g>
-            </g>
+            </motion.g>
           </motion.g>
           <motion.g
             id="items"
@@ -170,7 +170,7 @@ export default function SVGAnimation() {
               y1: "100%",
               y2: "100%",
             }}
-            animate={{
+            whileInView={{
               x1: ["-50%", "150%"],
               x2: ["0%", "100%"],
               y1: "100%",
@@ -185,7 +185,10 @@ export default function SVGAnimation() {
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#2769D4" stopOpacity="0" />
-            <stop stopColor="#2769D4" />
+            <stop offset="0.2" stopColor="#2769D4" />
+            <stop offset="0.4" stopColor="#1E90FF" />
+            <stop offset="0.6" stopColor="#00BFFF" />
+            <stop offset="0.8" stopColor="#87CEEB" />
             <stop offset="1" stopColor="#00BFFF" stopOpacity="0" />
           </motion.linearGradient>
           <motion.linearGradient 
@@ -201,7 +204,7 @@ export default function SVGAnimation() {
               y1: "100%",
               y2: "100%",
             }}
-            animate={{
+            whileInView={{
               x1: ["-50%", "150%"],
               x2: ["0%", "100%"],
               y1: "100%",
@@ -215,7 +218,10 @@ export default function SVGAnimation() {
             }}
           >
             <stop stopColor="#00BFFF" stopOpacity="0" />
-            <stop stopColor="#00BFFF" />
+            <stop offset="0.2" stopColor="#2769D4" />
+            <stop offset="0.4" stopColor="#1E90FF" />
+            <stop offset="0.6" stopColor="#00BFFF" />
+            <stop offset="0.8" stopColor="#87CEEB" />
             <stop offset="1" stopColor="#2769D4" stopOpacity="0" />
           </motion.linearGradient>
           <linearGradient id="paint6_linear_2062_232" x1="1338" y1="347.593" x2="1338" y2="492.761" gradientUnits="userSpaceOnUse">
