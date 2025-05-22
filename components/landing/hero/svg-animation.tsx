@@ -52,7 +52,7 @@ export default function SVGAnimation() {
           <motion.g
             id="flow"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 1.25, duration: 1, type: "spring", bounce: 0 }}
           >
             <path id="Vector 100 - muted" d="M128.5 77C332.133 77 340.258 325 549.985 325" stroke="var(--muted)" strokeWidth="2" />
@@ -66,7 +66,7 @@ export default function SVGAnimation() {
           <motion.g
             id="flow-lappy"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1, type: "spring", bounce: 0 }}
           >
             <path id="mid - muted" d="M950.448 425H1219.55" stroke="var(--muted)" strokeWidth="2" />
@@ -79,7 +79,7 @@ export default function SVGAnimation() {
           <motion.g
             id="laptop macbook pro"
             initial={{ opacity: 0, y: 50, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 1.25, duration: 0.5, type: "spring", bounce: 0 }}
             viewport={{ once: true }}
           >
@@ -95,7 +95,7 @@ export default function SVGAnimation() {
             id="knowledge"
             variants={container}
             initial="hidden"
-            whileInView="show"
+            animate="show"
             viewport={{ once: true, amount: 0.6 }}
           >
             <motion.g id="layer 1" variants={item}>
@@ -119,7 +119,7 @@ export default function SVGAnimation() {
               <path id="top_2" d="M782 217L750 201L718 217L750 233L782 217Z" fill="#0879FE" fillOpacity="0.4" />
               <path id="base3_2" d="M782 233L750 249L718 233V217L750 233L782 217V233Z" fill="#00AAF3" fillOpacity="0.5" />
             </motion.g>
-            <motion.g id="structure" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+            <motion.g id="structure" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <path id="base_2" d="M950 625V225L750 325L550 225V625L750 725L950 625Z" stroke="#044DDA" strokeLinejoin="round" />
               <path id="baseline" d="M750 325V725" stroke="#044DDA" />
               <path id="top_3" d="M750 325L550 225L750 125L950 225L750 325Z" stroke="#044DDA" strokeLinejoin="round" />
@@ -140,7 +140,7 @@ export default function SVGAnimation() {
             id="items"
             variants={iconContainer}
             initial="hidden"
-            whileInView="show"
+            animate="show"
             viewport={{ once: true, amount: 0.6 }}
           >
             <motion.g id="jpg" variants={icon}>
@@ -170,7 +170,7 @@ export default function SVGAnimation() {
               y1: "100%",
               y2: "100%",
             }}
-            whileInView={{
+            animate={{
               x1: ["-50%", "150%"],
               x2: ["0%", "100%"],
               y1: "100%",
@@ -204,7 +204,7 @@ export default function SVGAnimation() {
               y1: "100%",
               y2: "100%",
             }}
-            whileInView={{
+            animate={{
               x1: ["-50%", "150%"],
               x2: ["0%", "100%"],
               y1: "100%",
