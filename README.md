@@ -2,7 +2,7 @@
 
 A personal image storage platform that's secure, fast, and easy to use.
 
-![Stashly Landing](./public/preview.gif)
+![Stashly Landing Page](./public/preview.gif)
 
 ## Features
 
