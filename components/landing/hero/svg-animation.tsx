@@ -55,12 +55,13 @@ export default function SVGAnimation() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.25, duration: 1, type: "spring", bounce: 0 }}
           >
-            <path id="Vector 100" d="M128.5 77C332.133 77 340.258 325 549.985 325" stroke="url(#flow-gradient)" strokeWidth="4" />
             <path id="Vector 100 - muted" d="M128.5 77C332.133 77 340.258 325 549.985 325" stroke="var(--muted)" strokeWidth="2" />
-            <path id="Vector 101" d="M128.5 773C332.133 773 340.258 525 549.985 525" stroke="url(#flow-gradient)" strokeWidth="4" />
             <path id="Vector 101 - muted" d="M128.5 773C332.133 773 340.258 525 549.985 525" stroke="var(--muted)" strokeWidth="2" />
-            <path id="Vector 102" d="M550 425.5H128.67" stroke="url(#flow-gradient)" strokeWidth="4" />
             <path id="Vector 102 - muted" d="M550 425.5H128.67" stroke="var(--muted)" strokeWidth="2" />
+
+            <path id="Vector 100" d="M128.5 77C332.133 77 340.258 325 549.985 325" stroke="url(#flow-gradient)" strokeWidth="4" />
+            <path id="Vector 101" d="M128.5 773C332.133 773 340.258 525 549.985 525" stroke="url(#flow-gradient)" strokeWidth="4" />
+            <path id="Vector 102" d="M550 425.5H128.67" stroke="url(#flow-gradient)" strokeWidth="4" />
           </motion.g>
           <motion.g
             id="flow-lappy"
@@ -68,12 +69,12 @@ export default function SVGAnimation() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1, type: "spring", bounce: 0 }}
           >
-            <path id="mid" d="M950.448 425H1219.55" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
             <path id="mid - muted" d="M950.448 425H1219.55" stroke="var(--muted)" strokeWidth="2" />
-            <path id="top" d="M950 325C1042.84 325 1067.51 425 1220 425" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
             <path id="top - muted" d="M950 325C1042.84 325 1067.51 425 1220 425" stroke="var(--muted)" strokeWidth="2" />
-            <path id="bottom" d="M950 525C1042.84 525 1067.51 425 1220 425" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
             <path id="bottom - muted" d="M950 525C1042.84 525 1067.51 425 1220 425" stroke="var(--muted)" strokeWidth="2" />
+            <path id="mid" d="M950.448 425H1219.55" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
+            <path id="top" d="M950 325C1042.84 325 1067.51 425 1220 425" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
+            <path id="bottom" d="M950 525C1042.84 525 1067.51 425 1220 425" stroke="url(#flow-lappy-gradient)" strokeWidth="3" />
           </motion.g>
           <motion.g
             id="laptop macbook pro"
